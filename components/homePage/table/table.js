@@ -119,11 +119,15 @@ function Table(props) {
 				sortType
 			);
 
-			if (response.length > 0) {
-				setTable(response);
-				setSearchResult('success');
+			if (response) {
+				if (response.length > 0) {
+					setTable(response);
+					setSearchResult('success');
+				} else {
+					setSearchResult('error');
+				}
 			} else {
-				setSearchResult('error');
+				setSearchResult('fetcherror');
 			}
 		}
 
@@ -140,11 +144,15 @@ function Table(props) {
 				sortColumn,
 				sortType
 			);
-			if (response.length > 0) {
-				setTable(response);
-				setSearchResult('success');
+			if (response) {
+				if (response.length > 0) {
+					setTable(response);
+					setSearchResult('success');
+				} else {
+					setSearchResult('error');
+				}
 			} else {
-				setSearchResult('error');
+				setSearchResult('fetcherror');
 			}
 		}
 		if (props.searchValue.length >= 3) {
@@ -259,7 +267,11 @@ function Table(props) {
 					</tbody>
 				</table>
 
-				{searchResult === 'error' ? (
+				{searchResult === 'fetcherror' ? (
+					<div className={styles.errorInfo}>
+						<p>Błąd zapytania!</p>
+					</div>
+				) : searchResult === 'error' ? (
 					<div className={styles.errorInfo}>
 						<p>Brak wyników wyszukiwania!</p>
 					</div>
